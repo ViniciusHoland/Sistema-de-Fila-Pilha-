@@ -12,7 +12,7 @@ app.use(express.json())
 let registros = [
     {
         nome: 'Vinicius',
-        hora: "08:40:32"
+        horario: "08:40:32"
     },
 ]
 
@@ -23,16 +23,10 @@ app.get('/registros', (req,res) => {
 
 app.post('/registros', (req,res)=>{
 
-    const {nome} = req.body
+    const {nome, horario} = req.body
 
     if(nome){
-        const date = new Date()
-        const horaAtual = date.toLocaleTimeString('pt-br',{
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-        })
-        registros.push({nome,horaAtual})
+        registros.push({nome,horario})
         return res.status(201).json({ message: 'Registro adicionado!' });
     }
 
@@ -40,6 +34,11 @@ app.post('/registros', (req,res)=>{
 
 
 })
+
+app.delete('/registros', (req, res) => {
+    registros = [];
+    res.json({ message: 'Registros apagados!' });
+  })
 
 
 app.listen(PORT, () => {
