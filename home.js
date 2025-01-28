@@ -9,7 +9,38 @@ const DATA_ATUAL_KEY = 'dataAtual'
 function carregarRegistros(){
     const registroSalvos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
     const dataSalva = localStorage.getItem(DATA_ATUAL_KEY)
-    const dataAtual = new Date()
+    const dataAtual = new Date().toLocaleDateString()
+
+
+    if(dataSalva !== dataAtual){
+        localStorage.removeItem(STORAGE_KEY)
+        localStorage.setItem(DATA_ATUAL_KEY,dataAtual)
+        return []
+    }
+
+    registroSalvos.forEach((registro ) => adicionarNaLista(registro.nome, registro.horario))
+    return registroSalvos
+
+
+}
+
+function adicionarNaLista(nome,horario){
+
+    const atendenteItem = document.createElement('div')
+    atendenteItem.classList.add('atendente-item')
+
+    atendenteItem.innerHTML = `
+        <span>${nome}</span>
+        <span class="hora">${horario}</span>
+    `
+
+    //adiciona no topo da lista
+    listaAtendentes.prepend(atendenteItem)
+
+}
+
+function salvarRegistros(registros){
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(registros))
 }
 
 botaoAdicionar.addEventListener('click', () => {
@@ -29,16 +60,13 @@ botaoAdicionar.addEventListener('click', () => {
         second: '2-digit',
     })
 
-    const atendenteItem = document.createElement('div')
-    atendenteItem.classList.add('atendente-item')
+    adicionarNaLista(nomeAtendente, horaAtual)
 
-    atendenteItem.innerHTML = `
-        <span>${nomeAtendente}</span>
-        <span class="hora">${horaAtual}</span>
-    `
-
-    listaAtendentes.prepend(atendenteItem)
+    registros.push({nome: nomeAtendente, horario: horaAtual})
+    salvarRegistros(registros)
 
     inputNome.value = ''
 
 })
+
+let registros = carregarRegistros()
