@@ -1,25 +1,135 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Atendentes</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Registro de Atendentes</h1>
+    <!-- Firebase versão 8 (Compatível com seu código atual) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: flex; /* Adiciona flexbox */
+        flex-direction: column;
+        gap: 20px; /* Espaçamento entre os elementos */
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .lista-atendentes {
+        margin-top: 20px;
+      }
+
+      .atendente-item {
+        background: #f1f1f1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .hora {
+        color: #555;
+        font-size: 14px;
+      }
+
+      /* Novo layout lado a lado */
+      .lado-a-lado {
+        display: flex;
+        gap: 20px; /* Espaçamento entre os elementos */
+        justify-content: center; /* Centraliza os elementos */
+      }
+
+      .lado-a-lado .container {
+        flex: 1; /* Faz os contêineres terem tamanhos iguais */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lado-a-lado">
+      <div class="container">
+        <h1>EVOLUX</h1>
         <div class="input-group">
           <label for="nome">Nome do Atendente:</label>
-          <input type="text" id="nome" placeholder="Digite o nome">
+          <input type="text" id="nome" placeholder="Digite o nome" />
         </div>
         <button id="adicionar">Adicionar Atendente</button>
         <div class="lista-atendentes" id="lista-atendentes">
           <!-- Atendentes serão adicionados aqui -->
         </div>
       </div>
-      <div style="width: 20%; text-align: center; margin: auto; " ><button style="background-color: rgb(199, 97, 97); " id="deletar">Remover</button></div>
+
+      <div class="container">
+        <h1>NEURO</h1>
+        <div class="input-group">
+          <label for="nome">Nome do Atendente:</label>
+          <input type="text" id="nome" placeholder="Digite o nome" />
+        </div>
+        <button id="adicionarNeuro">Adicionar Atendente</button>
+        <div class="lista-atendentes" id="lista-atendentes">
+          <!-- Atendentes serão adicionados aqui -->
+        </div>
+      </div>
+    </div>
+    <div style="width: 20%; text-align: center; margin: auto; " ><button style="background-color: rgb(199, 97, 97); " id="deletar">Remover</button></div>
+    <script src="index.js">
     
-    <script src="index.js"></script>
-</body>
+    </script>
+  </body>
 </html>
